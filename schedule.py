@@ -52,23 +52,16 @@ def build_scheduled_chores_l(num_days):
         
         # check if any chores are done cooling down, if so, set thier deadline back to normal
         # and removes the chore name from the cooldown dict
-#         print('                                                                         about to enter loop') # d    ````````````````````````````````````````````
         cooldown_pop_l = []
         for chore_name, deadline in cooldown_chore_d.items():
-#             print(                            deadline)#``````````````````````````````````````````````````````````````````````````````
             if deadline <= 0:
-#                 print('                                                     deadline of ', chore_name , ' == 0, setting to ', chores.CHORE_D[chore_name] )#`````````````````````````````
                 i_chore_d[chore_name] = chores.CHORE_D[chore_name]
                 cooldown_pop_l.append(chore_name)
-#                 cooldown_chore_d.pop(chore_name)
         for chore_name in cooldown_pop_l:
             cooldown_chore_d.pop(chore_name)
-#         print('                                                                          out of loop')#````````````````````````````````````````````````
             
         
         shortest_deadline_chore_name = find_min_deadline_chore_if_exists(i_chore_d)
-        print('day: ', day_num, '  shortest_deadline_chore_name: ', shortest_deadline_chore_name )#````````````````````````````````
-        print(shortest_deadline_chore_name)
         
 
         if shortest_deadline_chore_name == False:
@@ -83,8 +76,6 @@ def build_scheduled_chores_l(num_days):
             if deadline != COOLDOWN_STR:
                 i_chore_d[chore_name] = (deadline - 1)
         
-        print('cooldown_chore_d', cooldown_chore_d)#`1```````````````````````````````````````````````````````
-        print('i_chore_d', i_chore_d)#`1```````````````````````````````````````````````````````
         
         for chore_name, deadline in cooldown_chore_d.items():
                 cooldown_chore_d[chore_name] = (deadline - 1)
@@ -114,11 +105,15 @@ def main():
     if u > 1:
         print('Utilization > 1, cannot schedule:  ', u)
     else:
-        c = input(str('Utilization = ' + str(u) + ' \nContinue? (y / n):  '))
+        num_days_until_repeat = shortest_repeating_cycle()
+        c = input(str('Utilization:                       ' + str(u) + 
+                      '\n# of days until schedule repeats:  ' + str(num_days_until_repeat) + 
+                      ' \nContinue? (y / n):  '))
         if c == 'n':
             exit()
         else:
-            print('here')
+            scheduled_chores_l = build_scheduled_chores_l(num_days_until_repeat)
+            print(scheduled_chores_l)
 
 
 
@@ -130,46 +125,5 @@ def main():
 
 
 main()
-
-
-
-
-
-
-
-# FREQ_INDEX       = 0
-# DEIVIATION_INDEX = 1
-# 
-# 
-# def build_chore_l(chore_d):
-#     # makes tuple of chores ordered from most to least frequent
-#     def build_chore_freq_t(chore_d):
-#         
-#         # make dict of just chores with thier freqs
-#         pure_chore_freq_d = {}
-#         for chore_name, freq_t in chore_d.items():
-#             pure_chore_freq_d[chore_name] = freq_t[FREQ_INDEX]
-#             
-# #         print(sorted(pure_chore_freq_d.items(), key=lambda item: item[1]))
-#         print(sorted(chore_d.items(), key=lambda item: item[1][0]))
-#             
-#         
-#     build_chore_freq_t(chore_d)
-#         
-#         
-# #         chore_freq_t = ("EMPTY") * len(chore_d)
-# #          
-# #         for chore_name, freq_t in chore_d.items():
-# #             print()
-#         
-# build_chore_l(chores.CHORE_D)
-#         
-#         
-# # for i in sorted(chores.CHORE_D):
-# #     print(i)
-
-
-
-
 
 

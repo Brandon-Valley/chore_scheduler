@@ -28,5 +28,6 @@ CHORE_D =  {'Vacuum Cats Room'      : 6,
 
 
 
-
-# import shcedule
+if __name__ == '__main__':
+    import schedule
+    schedule.main()

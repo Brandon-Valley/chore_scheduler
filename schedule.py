@@ -52,18 +52,18 @@ def build_scheduled_chores_l(num_days):
         
         # check if any chores are done cooling down, if so, set thier deadline back to normal
         # and removes the chore name from the cooldown dict
-        print('                                                                         about to enter loop') # d    ````````````````````````````````````````````
+#         print('                                                                         about to enter loop') # d    ````````````````````````````````````````````
         cooldown_pop_l = []
         for chore_name, deadline in cooldown_chore_d.items():
-            print(                            deadline)#``````````````````````````````````````````````````````````````````````````````
+#             print(                            deadline)#``````````````````````````````````````````````````````````````````````````````
             if deadline <= 0:
-                print('                                                     deadline of ', chore_name , ' == 0, setting to ', chores.CHORE_D[chore_name] )#`````````````````````````````
+#                 print('                                                     deadline of ', chore_name , ' == 0, setting to ', chores.CHORE_D[chore_name] )#`````````````````````````````
                 i_chore_d[chore_name] = chores.CHORE_D[chore_name]
                 cooldown_pop_l.append(chore_name)
 #                 cooldown_chore_d.pop(chore_name)
         for chore_name in cooldown_pop_l:
             cooldown_chore_d.pop(chore_name)
-        print('                                                                          out of loop')#````````````````````````````````````````````````
+#         print('                                                                          out of loop')#````````````````````````````````````````````````
             
         
         shortest_deadline_chore_name = find_min_deadline_chore_if_exists(i_chore_d)
@@ -95,17 +95,30 @@ def build_scheduled_chores_l(num_days):
 
 
 
-print (shortest_repeating_cycle())
-
-print(utilization())
-
-num_days_until_repeat = shortest_repeating_cycle()
-
-scheduled_chores_l = build_scheduled_chores_l(num_days_until_repeat)
-print(scheduled_chores_l)
 
 
 
+# print (shortest_repeating_cycle())
+# 
+# print(utilization())
+# 
+# num_days_until_repeat = shortest_repeating_cycle()
+# 
+# scheduled_chores_l = build_scheduled_chores_l(num_days_until_repeat)
+# print(scheduled_chores_l)
+
+
+def main():
+    
+    u = utilization()
+    if u > 1:
+        print('Utilization > 1, cannot schedule:  ', u)
+    else:
+        c = input(str('Utilization = ' + str(u) + ' \nContinue? (y / n):  '))
+        if c == 'n':
+            exit()
+        else:
+            print('here')
 
 
 
@@ -116,7 +129,7 @@ print(scheduled_chores_l)
 
 
 
-
+main()
 
 
 
